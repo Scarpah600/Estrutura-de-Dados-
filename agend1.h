@@ -30,18 +30,20 @@ Lista * iniciliza(void){
 }
 
 Lista* andando(Lista* i, int v){
-	Lista * novo = new Lista;
-	novo->info = v;
-	novo->prox = i;
-	novo->ant = NULL;
+	//Lista * novo = new Lista;
+	i->info = v;
+	i->prox = i;
+	i->ant = NULL;
 
 	if (i != NULL)
-		i->ant = novo;
+		i->ant = i;
 	return NULL;
 }
 Lista * insere1(Lista *i, string nomeRef, int idadeRef, string telRef){
 	
+	agenda *ag = new agenda;
 	Lista *novo = new Lista;
+	novo->itemAgenda = ag;
 	novo->itemAgenda->nome = nomeRef;
 	novo->itemAgenda->idade = idadeRef;
 	novo->itemAgenda->telefone = telRef;
@@ -82,21 +84,24 @@ void inserirdados(Lista *i)
 
 	cout << "Digite seu nome:";
 	cin.ignore();
-	getline(cin,nome);
+	//getline(cin,nome);
+	getline(cin, i->itemAgenda->nome);
 	cout << "Digite sua idade:";
-	cin >> idade;
+	//cin >> idade;
+	cin >> i->itemAgenda->idade;
 	cout << "Digite seu telefone:";
 	cin.ignore();
-	getline(cin, telefone);
+	getline(cin, i->itemAgenda->telefone);
 	
-	i = insere1(i,nome,idade,telefone);
+	i = insere1(i,i->itemAgenda->nome, i->itemAgenda->idade, i->itemAgenda->telefone);
 
 
 }
 
 void imprimir(Lista *i){
-	Lista *p;
 
+	Lista *p;
+	
 	for (p = i; p != NULL; p = p->prox)
 		if (p != NULL){
 			cout << "Nome: " << i->itemAgenda->nome << "\n" << "Idade:" << i->itemAgenda->idade << "\n" << "Telefone:" << i->itemAgenda->telefone << "\n";
@@ -104,4 +109,7 @@ void imprimir(Lista *i){
 		else{
 			cout << "Lista Vazia";
 		}
+		system("pause");
+	
+
 }
